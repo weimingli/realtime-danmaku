@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="mobile-web-app-capable" content="yes">
+<script src="js/aws-sdk-2.1.23.min.js"></script>
+<script src="js/readstream.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" href="css/animate.min.css" />
+
+<style type="text/css">
+    body {
+        background-color: black;
+    }
+    .ctxt{
+        width:100%;
+        height:650px;
+        overflow:auto;
+        margin:0 auto;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+    }
+    .ctxt p{
+        position:absolute;
+        margin:0;
+        width:auto;
+        font-size:28px;
+    }
+    #url {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size:20px;
+        color: aliceblue;
+    }
+</style>
+<script>
+
+    AWS.config.update({accessKeyId: 'AKIAPEWEOXUOQON52UAA', secretAccessKey: '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'});
+    AWS.config.region = 'cn-north-1';
+    var kinesis = new AWS.Kinesis();
+    var params = {
+      ShardId: 'shardId-000000000000',
+      //ShardIteratorType: 'TRIM_HORIZON',
+      ShardIteratorType: 'LATEST',
+      StreamName: 'danmaku',
+    }
+    
+    var pattern;
+    $.get( "/profanity-list.txt", function(badwords) {pattern = new RegExp(badwords,"i");} );
+    
+    kinesis.getShardIterator(params, function(err, data) {
+        if (!err) 
+            readStream(data.ShardIterator,pattern);
+    });
+
+
+</script>
+</head>
+<body>
+<!--<div id="url">http://3.cc/zkUNJ</div>-->
+    <div class="ctxt"></div>
+</body>
+</html>
+
