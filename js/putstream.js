@@ -1,4 +1,5 @@
-AWS.config.update({accessKeyId: 'AKIAPEWEOXUOQON52UAA', secretAccessKey: '2t93UOR35Y4H1XLvG/0UNNvsI5nrWQ1dSPbcAy9W'});
+//Please update your AK/SK right here
+AWS.config.update({accessKeyId: '', secretAccessKey: ''});
 AWS.config.region = 'cn-north-1';
 var kinesis = new AWS.Kinesis();
 
