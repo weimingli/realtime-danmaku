@@ -1,6 +1,5 @@
-//Please update your AK/SK right here
-AWS.config.update({accessKeyId: '', secretAccessKey: ''});
-AWS.config.region = 'cn-north-1';
+AWS.config.update({accessKeyId: 'AKIAOLDIVVVKWNM4V5YA', secretAccessKey: 'CBAwJec2ZIlPJ6CEuY4n0lvAzSuc60IPiFOvgXP9'});
+AWS.config.region = "cn-north-1";
 var kinesis = new AWS.Kinesis();
 
 function putStream(text) {

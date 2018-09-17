@@ -1,4 +1,4 @@
- function readStream(shardIteratorId, p) {
+ function readStream(shardIteratorId, pattern) {
   var self = this;
   var params = {
     ShardIterator: shardIteratorId, 
@@ -6,15 +6,15 @@
   };
 
   kinesis.getRecords(params, function(err, data) {
-    if (!err)
+    if (err) console.log(err, err.stack);
+    else    
     {
       if (data['Records'].length > 0) {
-
         var r;
         for (var i in data['Records']) {
 
             msg = data['Records'][i]['Data'].toString('utf8');
-            if (!pattern.test(msg)) showDanmaku(msg);       
+            showDanmaku(msg);       
         }
       }
             self.readStream(data['NextShardIterator']);
